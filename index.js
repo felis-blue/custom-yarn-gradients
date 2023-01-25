@@ -49,7 +49,11 @@ function handleTemplateClick(event) {
 
     let focused_color_parts = document.querySelectorAll('.color-part.focus');
     for (let part of focused_color_parts) {
-        part.dataset.color = color;
+        if (color) {
+            part.dataset.color = color;
+        } else {
+            delete part.dataset.color;
+        }
         part.classList.toggle('focus');
     }
 

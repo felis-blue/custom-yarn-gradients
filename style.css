@@ -59,10 +59,6 @@ body {
     grid-template-areas: "label select";
 }
 
-.rows {
-    grid-template-rows: repeat(2, auto);
-}
-
 label {
     font-weight: bold;
 }
@@ -107,7 +103,6 @@ select,
 .form-text {
     width: 100%;
     border: 2px solid transparent;
-    border-radius: .5em;
 
     padding: .5em;
     margin-block: .5rem;

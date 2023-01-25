@@ -34,7 +34,7 @@ body {
 .container {
     width: 80%;
     padding: 3rem;
-    border-radius: 6px;
+    border-radius: .5em;
     background-color: var(--background);
     box-shadow: 0 0 8px 2px var(--shadow);
 }

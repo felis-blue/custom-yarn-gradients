@@ -40,6 +40,8 @@ function updateAll() {
             color_div.append(color_part);
         }
     }
+
+    createPattern();
 }
 
 function handleTemplateClick(event) {

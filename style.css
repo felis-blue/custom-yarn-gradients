@@ -115,7 +115,7 @@ select,
     margin-block: .5rem;
 }
 
-#color-selection {
+#color-templates {
     display: grid;
     grid-template-columns: repeat(10, auto);
     gap: .2em;

@@ -181,11 +181,6 @@ select,
     grid-row: 5 / 5;
 }
 
-svg {
-    stroke-linecap: round;
-    stroke-width: 1px;
-}
-
 .hidden {
     display: none;
 }

@@ -26,7 +26,7 @@ function updateAll() {
     }
 
     let weight = Math.floor(yarn_length * thread_number * 5 / 15) * 10;
-    weight_text.innerText = weight + 'g';
+    weight_text.innerText = `${weight}g`;
 
     color_div.replaceChildren();
     for (let segment = 0; segment < yarn_length; segment++) {

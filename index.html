@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Yarn Gradients</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <div id="templates" class="hidden">
+        <svg id="svg">
+            <path id="path" d="M 5 5 l 0 90"></path>
+        </svg>
+    </div>
+    <div class="container">
+        <div class="banner">
+            <h1>Custom Yarn Gradients</h1>
+        </div>
+        <form>
+            <div class="item cols">
+                <label for="yarn-length">Length of yarn</label>
+                <select name="yarn-length" id="yarn-length">
+                    <option disabled value> -- select -- </option>
+                    <option value="10">500m</option>
+                    <option value="15">750m</option>
+                    <option selected value="20">1000m</option>
+                    <option value="25">1250m</option>
+                    <option value="30">1500m</option>
+                    <option value="40">2000m</option>
+                    <option value="50">2500m</option>
+                </select>
+                <div class="select-arrow"></div>
+            </div>
+
+            <div class="item cols">
+                <label for="thread-number">Number of threads</label>
+                <select name="thread-number" id="thread-number">
+                    <option disabled value> -- select -- </option>
+                    <option selected value="3">3 threads</option>
+                    <option value="4">4 threads</option>
+                    <option value="5">5 threads</option>
+                </select>
+                <div class="select-arrow"></div>
+            </div>
+
+
+            <div class="item cols">
+                <label for="yarn-weight">Weight</label>
+                <span id="yarn-weight" class="form-text">0 g</span>
+            </div>
+
+            <div class="item rows">
+                <label for="color-selection">Colors</label>
+                <div id="color-selection">
+                    <div class="color template" data-color="petrol"></div>
+                    <div class="color template" data-color="hell-petrol"></div>
+                    <div class="color template" data-color="pistazie"></div>
+                    <div class="color template" data-color="vanille"></div>
+                    <div class="color template" data-color="moccha"></div>
+                </div>
+            </div>
+
+            <div class="item rows">
+                <label for="yarn-colors">Colorway</label>
+                <div id="yarn-colors"></div>
+            </div>
+
+            <div class="item rows">
+                <label for="pattern">Pattern</label>
+                <div id="pattern">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

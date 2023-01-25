@@ -153,3 +153,17 @@ select,
 .color-part[data-row="4"] {
     grid-row: 5 / 5;
 }
+
+#dowload-link {
+    text-decoration: none;
+    color: var(--text);
+
+    width: fit-content;
+    justify-self: right;
+
+    border: 2px solid var(--text-accent);
+    border-radius: .5em;
+
+    padding: .5em;
+    margin-block: .5rem;
+}

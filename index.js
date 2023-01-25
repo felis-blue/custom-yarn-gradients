@@ -110,6 +110,11 @@ function createPattern() {
     }
 
     pattern_div.append(svg);
+
+    var svg_string = new XMLSerializer().serializeToString(svg);
+    var svgBlob = new Blob([svg_string], { type: "image/svg+xml;charset=utf-8" });
+    var url = URL.createObjectURL(svgBlob);
+    document.getElementById("dowload-link").href = url;
 }
 
 function getColorMap() {

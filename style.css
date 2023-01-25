@@ -27,6 +27,10 @@ body {
     padding: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     width: 80%;
     padding: 3rem;
@@ -153,8 +157,4 @@ select,
 
 .color-part[data-row="4"] {
     grid-row: 5 / 5;
-}
-
-.hidden {
-    display: none;
 }

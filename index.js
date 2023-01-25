@@ -14,11 +14,16 @@ window.onload = () => {
 
 function populateColors() {
     let template = document.querySelector('.template');
+    let stylesheet = document.getElementById('styles').sheet;
+
     for (let [color_name, hex_code] of colors) {
         let new_template = template.cloneNode();
         new_template.dataset.color = color_name;
 
         template_div.appendChild(new_template);
+
+        let new_rule = `[data-color="${color_name}"] {--color: ${hex_code};}`
+        stylesheet.insertRule(new_rule);
     }
 }
 

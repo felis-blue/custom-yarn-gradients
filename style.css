@@ -4,12 +4,6 @@
     --text: #484848;
     --text-accent: #686868;
     --shadow: #a8a8a8;
-
-    --petrol: #345870;
-    --hell-petrol: #6495B3;
-    --pistazie: #C5EDEA;
-    --vanille: #D3CDAC;
-    --moccha: #AC7C54;
 }
 
 *,
@@ -129,26 +123,6 @@ select,
     background-color: var(--color, transparent);
 
     box-shadow: 1px 1px 6px 2px var(--background-accent);
-}
-
-[data-color="petrol"] {
-    --color: var(--petrol);
-}
-
-[data-color="hell-petrol"] {
-    --color: var(--hell-petrol);
-}
-
-[data-color="pistazie"] {
-    --color: var(--pistazie);
-}
-
-[data-color="vanille"] {
-    --color: var(--vanille);
-}
-
-[data-color="moccha"] {
-    --color: var(--moccha);
 }
 
 #yarn-colors {

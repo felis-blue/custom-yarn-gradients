@@ -8,6 +8,7 @@
     <title>Custom Yarn Gradients</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="index.js"></script>
+    <script src="colors.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
         <form>
             <div class="item cols">
                 <label for="yarn-length">Length of yarn</label>
-                <select name="yarn-length" id="yarn-length">
+                <select name="yarn-length" id="yarn-length" onchange="updateAll()">
                     <option disabled value> -- select -- </option>
                     <option value="10">500m</option>
                     <option value="15">750m</option>
@@ -38,9 +39,9 @@
 
             <div class="item cols">
                 <label for="thread-number">Number of threads</label>
-                <select name="thread-number" id="thread-number">
+                <select name="thread-number" id="thread-number" onchange="updateAll()">
                     <option disabled value> -- select -- </option>
-                    <option selected value="3">3 threads</option>
+                    <option selected value=" 3">3 threads</option>
                     <option value="4">4 threads</option>
                     <option value="5">5 threads</option>
                 </select>
@@ -56,12 +57,7 @@
             <div class="item rows">
                 <label for="color-templates">Colors</label>
                 <div id="color-templates">
-                    <div class="color template"></div>
-                    <div class="color template" data-color="petrol"></div>
-                    <div class="color template" data-color="hell-petrol"></div>
-                    <div class="color template" data-color="pistazie"></div>
-                    <div class="color template" data-color="vanille"></div>
-                    <div class="color template" data-color="moccha"></div>
+                    <div class="color template" onclick="handleTemplateClick(event)"></div>
                 </div>
             </div>
 

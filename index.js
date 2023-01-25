@@ -1,20 +1,25 @@
-let yarn_length_field, thread_number_field, weight_text, color_div, pattern_div;
+let yarn_length_field, thread_number_field, weight_text, template_div, color_div, pattern_div;
 
 window.onload = () => {
     yarn_length_field = document.getElementById('yarn-length');
-    yarn_length_field.onchange = updateAll;
     thread_number_field = document.getElementById('thread-number');
-    thread_number_field.onchange = updateAll;
     weight_text = document.getElementById('yarn-weight');
+    template_div = document.getElementById('color-templates');
     color_div = document.getElementById('yarn-colors');
     pattern_div = document.getElementById('pattern');
 
-    let templates = document.querySelectorAll('.template');
-    for (let template of templates) {
-        template.onclick = handleTemplateClick;
-    }
-
+    populateColors();
     updateAll();
+}
+
+function populateColors() {
+    let template = document.querySelector('.template');
+    for (let [color_name, hex_code] of colors) {
+        let new_template = template.cloneNode();
+        new_template.dataset.color = color_name;
+
+        template_div.appendChild(new_template);
+    }
 }
 
 function updateAll() {

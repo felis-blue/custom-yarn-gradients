@@ -35,7 +35,7 @@ function updateAll() {
             color_part.classList.add('color', 'color-part');
             color_part.dataset.segment = segment;
             color_part.dataset.row = thread;
-            color_part.onclick = (() => color_part.classList.toggle('focus'));
+            color_part.onclick = handleColorPartClick;
 
             color_div.append(color_part);
         }
@@ -103,4 +103,18 @@ function getColorMap() {
         color_map[[part.dataset.segment, part.dataset.row]] = part.dataset.color;
     }
     return color_map;
+}
+
+function handleColorPartClick(event) {
+    let toggle_state = event.target.classList.toggle('focus');
+
+    if (event.shiftKey) {
+        let current_row = event.target.dataset.row;
+        let color_parts = document.querySelectorAll(`.color-part[data-row="${current_row}"]`);
+        for (let part of color_parts) {
+            if (!part.dataset.color && +part.dataset.segment < +event.target.dataset.segment) {
+                part.classList.toggle('focus', toggle_state);
+            }
+        }
+    }
 }

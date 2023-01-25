@@ -97,7 +97,9 @@ function createPattern() {
                 path.removeAttribute('id');
 
                 let color = color_map[[segment, thread]];
-                path.dataset.color = color;
+                if (color) {
+                    path.setAttribute('stroke', colors.get(color));
+                }
 
                 let position = (segment * thread_count) * 10 + thread_count * i + thread + .5;
                 path.setAttribute('d', `M ${position} 1 l 0 ${height - 2}`);

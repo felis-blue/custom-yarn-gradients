@@ -158,7 +158,3 @@ select,
 .hidden {
     display: none;
 }
-
-path {
-    stroke: var(--color, var(--background-accent));
-}

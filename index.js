@@ -116,7 +116,8 @@ function handleColorPartClick(event) {
         let current_row = event.target.dataset.row;
         let color_parts = document.querySelectorAll(`.color-part[data-row="${current_row}"]`);
         for (let part of color_parts) {
-            if (!part.dataset.color && +part.dataset.segment < +event.target.dataset.segment) {
+            if (part.dataset.color === event.target.dataset.color
+                && +part.dataset.segment < +event.target.dataset.segment) {
                 part.classList.toggle('focus', toggle_state);
             }
         }

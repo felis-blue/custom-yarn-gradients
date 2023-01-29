@@ -16,11 +16,15 @@ function populateColors() {
     let template = document.querySelector('.template');
     let stylesheet = document.getElementById('styles').sheet;
 
-    for (let [color_name, hex_code] of colors) {
+    for (let [color_name, [hex_code, text_color]] of colors) {
         let new_template = template.cloneNode();
         new_template.dataset.color = color_name;
+        let name_div = document.createElement('div');
+        name_div.classList.add(text_color);
+        name_div.innerText = color_name;
 
-        template_div.appendChild(new_template);
+        new_template.appendChild(name_div);
+        template_div.insertBefore(new_template, template);
 
         let new_rule = `[data-color="${color_name}"] {--color: ${hex_code};}`
         stylesheet.insertRule(new_rule);
@@ -54,8 +58,8 @@ function updateAll() {
     createPattern();
 }
 
-function handleTemplateClick(event) {
-    color = event.target.dataset.color;
+function handleTemplateClick(target) {
+    color = target.dataset.color;
 
     let focused_color_parts = document.querySelectorAll('.color-part.focus');
     for (let part of focused_color_parts) {
@@ -98,7 +102,7 @@ function createPattern() {
 
                 let color = color_map[[segment, thread]];
                 if (color) {
-                    path.setAttribute('stroke', colors.get(color));
+                    path.setAttribute('stroke', colors.get(color)[0]);
                 }
 
                 let position = (segment * thread_count) * 10 + thread_count * i + thread + .5;

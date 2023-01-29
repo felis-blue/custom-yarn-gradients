@@ -110,7 +110,7 @@ select,
 
 #color-templates {
     display: grid;
-    grid-template-columns: repeat(10, auto);
+    grid-template-columns: repeat(8, auto);
     gap: .2em;
 }
 
@@ -122,6 +122,25 @@ select,
     background-color: var(--color, transparent);
 
     box-shadow: 1px 1px 6px 2px var(--background-accent);
+}
+
+.template {
+    height: 2em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.light {
+    color: var(--background-accent);
+    text-shadow: 1px 1px 2px var(--text-accent);
+}
+
+.dark {
+    text-shadow: 1px 1px 2px var(--background-accent);
 }
 
 #yarn-colors {

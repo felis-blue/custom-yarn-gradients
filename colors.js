@@ -1,7 +1,7 @@
 const colors = new Map([
-    ["petrol", "#345870"],
-    ["hell-petrol", "#6495B3"],
-    ["pistazie", "#C5EDEA"],
-    ["vanille", "#D3CDAC"],
-    ["moccha", "#AC7C54"]
+    ['petrol', ['#345870', 'light']],
+    ['hell-petrol', ['#6495B3', 'light']],
+    ['pistazie', ['#C5EDEA', 'dark']],
+    ['vanille', ['#D3CDAC', 'dark']],
+    ['moccha', ['#AC7C54', 'light']]
 ]);

@@ -33,8 +33,8 @@
             </div>
 
             <div class="item cols">
-                <label for="thread-number">Number of threads</label>
-                <select name="thread-number" id="thread-number" onchange="updateAll()">
+                <label for="thread-count">Number of threads</label>
+                <select name="thread-count" id="thread-count" onchange="updateAll()">
                     <option disabled value> -- select -- </option>
                     <option selected value=" 3">3 threads</option>
                     <option value="4">4 threads</option>
@@ -52,7 +52,7 @@
             <div class="item rows">
                 <label for="color-templates">Colors</label>
                 <div id="color-templates">
-                    <button type="button" class="color template" onclick="handleTemplateClick(this)">
+                    <button type="button" class="color color-template" onclick="handleTemplateClick(this)">
                         Remove color
                     </button>
                 </div>

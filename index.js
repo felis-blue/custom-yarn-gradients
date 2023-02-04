@@ -1,19 +1,16 @@
-let yarn_length_field, thread_number_field, weight_text, template_div, color_div, pattern_div;
+let segment_count_field, thread_count_field;
 
 window.onload = () => {
-    yarn_length_field = document.getElementById('yarn-length');
-    thread_number_field = document.getElementById('thread-number');
-    weight_text = document.getElementById('yarn-weight');
-    template_div = document.getElementById('color-templates');
-    color_div = document.getElementById('yarn-colors');
-    pattern_div = document.getElementById('pattern');
+    segment_count_field = document.getElementById('yarn-length');
+    thread_count_field = document.getElementById('thread-count');
 
     populateColors();
     updateAll();
 }
 
 function populateColors() {
-    let template = document.querySelector('.template');
+    let template_div = document.getElementById('color-templates');
+    let template = document.querySelector('.color-template');
     let stylesheet = document.getElementById('styles').sheet;
 
     for (let [color_name, [hex_code, text_color]] of colors) {
@@ -29,19 +26,20 @@ function populateColors() {
 }
 
 function updateAll() {
-    let yarn_length = yarn_length_field.value;
-    let thread_number = thread_number_field.value;
+    let segment_count = parseInt(segment_count_field.value);
+    let thread_count = parseInt(thread_count_field.value);
 
-    if (!(yarn_length && thread_number)) {
+    if (!(segment_count && thread_count)) {
         return;
     }
 
-    let weight = Math.floor(yarn_length * thread_number * 5 / 15) * 10;
-    weight_text.innerText = `${weight}g`;
+    let weight = Math.floor(segment_count * thread_count * 5 / 15) * 10;
+    document.getElementById('yarn-weight').innerText = `${weight}g`;
 
+    let color_div = document.getElementById('yarn-colors');
     color_div.replaceChildren();
-    for (let segment = 0; segment < yarn_length; segment++) {
-        for (let thread = 0; thread < thread_number; thread++) {
+    for (let segment = 0; segment < segment_count; segment++) {
+        for (let thread = 0; thread < thread_count; thread++) {
             let color_part = document.createElement('button');
             color_part.setAttribute('type', 'button');
             color_part.classList.add('color', 'color-part');
@@ -73,10 +71,10 @@ function handleTemplateClick(target) {
 }
 
 function createPattern() {
-    let segments_count = parseInt(yarn_length_field.value);
-    let thread_count = parseInt(thread_number_field.value);
+    let segment_count = parseInt(segment_count_field.value);
+    let thread_count = parseInt(thread_count_field.value);
 
-    if (!(segments_count && thread_count)) {
+    if (!(segment_count && thread_count)) {
         return;
     }
 
@@ -92,14 +90,14 @@ function createPattern() {
     let svg = document.getElementById('svg');
 
     let width = colunm_repeats * template_width + (colunm_repeats - 1) * template_spacing_width;
-    let rows_total = segments_count * row_repeats;
+    let rows_total = segment_count * row_repeats;
     let height = rows_total * template_height + (rows_total - 1) * template_spacing_height;
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
     let group = document.getElementById('path-group');
     group.replaceChildren();
 
-    for (let segment = 0; segment < segments_count; segment++) {
+    for (let segment = 0; segment < segment_count; segment++) {
         let color_array = color_map[segment];
 
         for (let j = 0; j < row_repeats; j++) {

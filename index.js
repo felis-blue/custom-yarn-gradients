@@ -77,38 +77,79 @@ function handleTemplateClick(target) {
 function createPattern() {
     pattern_div.replaceChildren();
 
-    let color_map = getColorMap();
-
-    let segments_count = yarn_length_field.value;
-    let thread_count = thread_number_field.value;
+    let segments_count = parseInt(yarn_length_field.value);
+    let thread_count = parseInt(thread_number_field.value);
 
     if (!(segments_count && thread_count)) {
         return;
     }
 
+    let color_map = getColorMap();
+
     let svg = document.getElementById('svg').cloneNode();
     svg.removeAttribute('id');
 
-    let width = segments_count * thread_count * 10;
-    let height = Math.floor(width / 18);
-    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    let height = segments_count * 3 * 115 + 50;
+    svg.setAttribute('viewBox', `0 0 18690 ${height}`);
 
-    let path_template = document.getElementById('path')
+    let templates = {};
+    templates[[3, 0]] = document.getElementById('path-3-1').cloneNode();
+    templates[[3, 0]].removeAttribute('id');
+    templates[[3, 1]] = document.getElementById('path-3-2').cloneNode();
+    templates[[3, 1]].removeAttribute('id');
+    templates[[3, 2]] = document.getElementById('path-3-3').cloneNode();
+    templates[[3, 2]].removeAttribute('id');
+
+    templates[[4, 0]] = document.getElementById('path-4-1').cloneNode();
+    templates[[4, 0]].removeAttribute('id');
+    templates[[4, 1]] = document.getElementById('path-4-2').cloneNode();
+    templates[[4, 1]].removeAttribute('id');
+    templates[[4, 2]] = document.getElementById('path-4-3').cloneNode();
+    templates[[4, 2]].removeAttribute('id');
+    templates[[4, 3]] = document.getElementById('path-4-4').cloneNode();
+    templates[[4, 3]].removeAttribute('id');
+
+    templates[[5, 0]] = document.getElementById('path-5-1').cloneNode();
+    templates[[5, 0]].removeAttribute('id');
+    templates[[5, 1]] = document.getElementById('path-5-2').cloneNode();
+    templates[[5, 1]].removeAttribute('id');
+    templates[[5, 2]] = document.getElementById('path-5-3').cloneNode();
+    templates[[5, 2]].removeAttribute('id');
+    templates[[5, 3]] = document.getElementById('path-5-4').cloneNode();
+    templates[[5, 3]].removeAttribute('id');
+    templates[[5, 4]] = document.getElementById('path-5-5').cloneNode();
+    templates[[5, 4]].removeAttribute('id');
+
+    let nested_svg_template = document.getElementById('nested_svg').cloneNode();
+    nested_svg_template.removeAttribute('id');
+
+    for (let thread = 0; thread < thread_count; thread++) {
+        let path = templates[[thread_count, thread]].cloneNode();
+        nested_svg_template.appendChild(path);
+    }
+
     for (let segment = 0; segment < segments_count; segment++) {
-        for (let i = 0; i < 10; i++) {
-            for (let thread = 0; thread < thread_count; thread++) {
-                let path = path_template.cloneNode();
-                path.removeAttribute('id');
 
-                let color = color_map[[segment, thread]];
-                if (color) {
-                    path.setAttribute('stroke', colors.get(color)[0]);
+        let color_array = color_map[segment];
+
+        for (let j = 0; j < 3; j++) {
+            for (let i = 0; i < 85; i++) {
+                let nested_svg = nested_svg_template.cloneNode(true);
+
+                const shuffled_colors = color_array.sort(() => 0.5 - Math.random());
+                for (let [i, path] of nested_svg.childNodes.entries()) {
+                    let color = shuffled_colors[i];
+                    if (color) {
+                        path.setAttribute('fill', colors.get(color)[0]);
+                    }
                 }
 
-                let position = (segment * thread_count) * 10 + thread_count * i + thread + .5;
-                path.setAttribute('d', `M ${position} 1 l 0 ${height - 2}`);
+                let x = i * 220;
+                let y = segment * 3 * 115 + j * 115;
+                nested_svg.setAttribute('x', x);
+                nested_svg.setAttribute('y', y);
 
-                svg.appendChild(path);
+                svg.appendChild(nested_svg);
             }
         }
     }
@@ -122,10 +163,13 @@ function createPattern() {
 }
 
 function getColorMap() {
-    let color_map = {};
+    let color_map = [];
     let color_parts = document.querySelectorAll('.color-part');
     for (let part of color_parts) {
-        color_map[[part.dataset.segment, part.dataset.row]] = part.dataset.color;
+        if (!color_map[part.dataset.segment]) {
+            color_map[part.dataset.segment] = []
+        }
+        color_map[part.dataset.segment][part.dataset.row] = part.dataset.color;
     }
     return color_map;
 }

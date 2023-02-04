@@ -84,13 +84,22 @@ function createPattern() {
         return;
     }
 
+    let row_repeats = 3;
+    let colunm_repeats = 85;
+    let template_width = 210;
+    let template_height = 165;
+    let template_spacing_width = 10;
+    let template_spacing_height = -50;
+
     let color_map = getColorMap();
 
     let svg = document.getElementById('svg').cloneNode();
     svg.removeAttribute('id');
 
-    let height = segments_count * 3 * 115 + 50;
-    svg.setAttribute('viewBox', `0 0 18690 ${height}`);
+    let width = colunm_repeats * template_width + (colunm_repeats - 1) * template_spacing_width;
+    let rows_total = segments_count * row_repeats;
+    let height = rows_total * template_height + (rows_total - 1) * template_spacing_height;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
     let templates = {};
     templates[[3, 0]] = document.getElementById('path-3-1').cloneNode();
@@ -132,8 +141,8 @@ function createPattern() {
 
         let color_array = color_map[segment];
 
-        for (let j = 0; j < 3; j++) {
-            for (let i = 0; i < 85; i++) {
+        for (let j = 0; j < row_repeats; j++) {
+            for (let i = 0; i < colunm_repeats; i++) {
                 let nested_svg = nested_svg_template.cloneNode(true);
 
                 const shuffled_colors = color_array.sort(() => 0.5 - Math.random());
@@ -144,8 +153,8 @@ function createPattern() {
                     }
                 }
 
-                let x = i * 220;
-                let y = segment * 3 * 115 + j * 115;
+                let x = i * (template_width + template_spacing_width);
+                let y = (segment * row_repeats + j) * (template_height + template_spacing_height);
                 nested_svg.setAttribute('x', x);
                 nested_svg.setAttribute('y', y);
 

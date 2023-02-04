@@ -2,7 +2,9 @@ let segment_count_field, thread_count_field;
 
 window.onload = () => {
     segment_count_field = document.getElementById('yarn-length');
+    segment_count_field.onchange = updateAll;
     thread_count_field = document.getElementById('thread-count');
+    thread_count_field.onchange = updateAll;
 
     populateColors();
     updateAll();
@@ -11,6 +13,7 @@ window.onload = () => {
 function populateColors() {
     let template_div = document.getElementById('color-templates');
     let template = document.querySelector('.color-template');
+    template.onclick = handleTemplateClick;
     let stylesheet = document.getElementById('styles').sheet;
 
     for (let [color_name, [hex_code, text_color]] of colors) {
@@ -18,6 +21,7 @@ function populateColors() {
         new_template.dataset.color = color_name;
         new_template.classList.add(text_color);
         new_template.innerText = color_name;
+        new_template.onclick = handleTemplateClick;
         template_div.insertBefore(new_template, template);
 
         let new_rule = `[data-color="${color_name}"] {--color: ${hex_code};}`
@@ -54,8 +58,8 @@ function updateAll() {
     createPattern();
 }
 
-function handleTemplateClick(target) {
-    color = target.dataset.color;
+function handleTemplateClick(event) {
+    color = event.target.dataset.color;
 
     let focused_color_parts = document.querySelectorAll('.color-part.focus');
     for (let part of focused_color_parts) {

@@ -16,15 +16,15 @@ function populateColors() {
     template.onclick = handleTemplateClick;
     let stylesheet = document.getElementById('styles').sheet;
 
-    for (let [color_name, [hex_code, text_color]] of colors) {
+    for (let [color_name, c] of colors) {
         let new_template = template.cloneNode();
         new_template.dataset.color = color_name;
-        new_template.classList.add(text_color);
+        new_template.classList.add(c.text_color);
         new_template.innerText = color_name;
         new_template.onclick = handleTemplateClick;
         template_div.insertBefore(new_template, template);
 
-        let new_rule = `[data-color="${color_name}"] {--color: ${hex_code};}`
+        let new_rule = `[data-color="${color_name}"] {--color: ${c.hex};}`
         stylesheet.insertRule(new_rule);
     }
 }
@@ -114,7 +114,7 @@ function createPattern() {
 
                     let color = shuffled_colors[thread];
                     if (color) {
-                        path.setAttribute('fill', colors.get(color)[0]);
+                        path.setAttribute('fill', colors.get(color).hex);
                     }
 
                     let x = i * (template_width + template_spacing_width);

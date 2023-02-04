@@ -19,11 +19,8 @@ function populateColors() {
     for (let [color_name, [hex_code, text_color]] of colors) {
         let new_template = template.cloneNode();
         new_template.dataset.color = color_name;
-        let name_div = document.createElement('div');
-        name_div.classList.add(text_color);
-        name_div.innerText = color_name;
-
-        new_template.appendChild(name_div);
+        new_template.classList.add(text_color);
+        new_template.innerText = color_name;
         template_div.insertBefore(new_template, template);
 
         let new_rule = `[data-color="${color_name}"] {--color: ${hex_code};}`
@@ -45,7 +42,8 @@ function updateAll() {
     color_div.replaceChildren();
     for (let segment = 0; segment < yarn_length; segment++) {
         for (let thread = 0; thread < thread_number; thread++) {
-            let color_part = document.createElement('div');
+            let color_part = document.createElement('button');
+            color_part.setAttribute('type', 'button');
             color_part.classList.add('color', 'color-part');
             color_part.dataset.segment = segment;
             color_part.dataset.row = thread;

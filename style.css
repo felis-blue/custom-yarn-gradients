@@ -114,6 +114,13 @@ select,
     gap: .2em;
 }
 
+button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
 .color {
     width: 100%;
     height: 1.5em;
@@ -126,12 +133,6 @@ select,
 
 .template {
     height: 2em;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
 }
 
 .light {

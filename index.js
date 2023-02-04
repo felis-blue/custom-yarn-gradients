@@ -128,10 +128,24 @@ function createPattern() {
         }
     }
 
+    // svg download
     var svg_string = new XMLSerializer().serializeToString(svg);
-    var svgBlob = new Blob([svg_string], { type: "image/svg+xml;charset=utf-8" });
+    var svgBlob = new Blob([svg_string], { type: 'image/svg+xml;charset=utf-8' });
     var url = URL.createObjectURL(svgBlob);
-    document.getElementById("dowload-link").href = url;
+    document.getElementById('download-svg-link').href = url;
+
+    // png download
+    let image = new Image();
+    image.onload = () => {
+        let canvas = document.createElement('canvas');
+        canvas.width = width / 10;
+        canvas.height = height / 10;
+        let context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0, width / 10, height / 10);
+        let png = canvas.toDataURL('image/png');
+        document.getElementById('download-png-link').href = png;
+    };
+    image.src = url;
 }
 
 function getColorMap() {

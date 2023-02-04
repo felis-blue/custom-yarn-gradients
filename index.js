@@ -73,8 +73,6 @@ function handleTemplateClick(target) {
 }
 
 function createPattern() {
-    pattern_div.replaceChildren();
-
     let segments_count = parseInt(yarn_length_field.value);
     let thread_count = parseInt(thread_number_field.value);
 
@@ -91,77 +89,42 @@ function createPattern() {
 
     let color_map = getColorMap();
 
-    let svg = document.getElementById('svg').cloneNode();
-    svg.removeAttribute('id');
+    let svg = document.getElementById('svg');
 
     let width = colunm_repeats * template_width + (colunm_repeats - 1) * template_spacing_width;
     let rows_total = segments_count * row_repeats;
     let height = rows_total * template_height + (rows_total - 1) * template_spacing_height;
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
 
-    let templates = {};
-    templates[[3, 0]] = document.getElementById('path-3-1').cloneNode();
-    templates[[3, 0]].removeAttribute('id');
-    templates[[3, 1]] = document.getElementById('path-3-2').cloneNode();
-    templates[[3, 1]].removeAttribute('id');
-    templates[[3, 2]] = document.getElementById('path-3-3').cloneNode();
-    templates[[3, 2]].removeAttribute('id');
-
-    templates[[4, 0]] = document.getElementById('path-4-1').cloneNode();
-    templates[[4, 0]].removeAttribute('id');
-    templates[[4, 1]] = document.getElementById('path-4-2').cloneNode();
-    templates[[4, 1]].removeAttribute('id');
-    templates[[4, 2]] = document.getElementById('path-4-3').cloneNode();
-    templates[[4, 2]].removeAttribute('id');
-    templates[[4, 3]] = document.getElementById('path-4-4').cloneNode();
-    templates[[4, 3]].removeAttribute('id');
-
-    templates[[5, 0]] = document.getElementById('path-5-1').cloneNode();
-    templates[[5, 0]].removeAttribute('id');
-    templates[[5, 1]] = document.getElementById('path-5-2').cloneNode();
-    templates[[5, 1]].removeAttribute('id');
-    templates[[5, 2]] = document.getElementById('path-5-3').cloneNode();
-    templates[[5, 2]].removeAttribute('id');
-    templates[[5, 3]] = document.getElementById('path-5-4').cloneNode();
-    templates[[5, 3]].removeAttribute('id');
-    templates[[5, 4]] = document.getElementById('path-5-5').cloneNode();
-    templates[[5, 4]].removeAttribute('id');
-
-    let nested_svg_template = document.getElementById('nested_svg').cloneNode();
-    nested_svg_template.removeAttribute('id');
-
-    for (let thread = 0; thread < thread_count; thread++) {
-        let path = templates[[thread_count, thread]].cloneNode();
-        nested_svg_template.appendChild(path);
-    }
+    let group = document.getElementById('path-group');
+    group.replaceChildren();
 
     for (let segment = 0; segment < segments_count; segment++) {
-
         let color_array = color_map[segment];
 
         for (let j = 0; j < row_repeats; j++) {
             for (let i = 0; i < colunm_repeats; i++) {
-                let nested_svg = nested_svg_template.cloneNode(true);
-
                 const shuffled_colors = color_array.sort(() => 0.5 - Math.random());
-                for (let [i, path] of nested_svg.childNodes.entries()) {
-                    let color = shuffled_colors[i];
+
+                for (let thread = 0; thread < thread_count; thread++) {
+                    let path = document.createElementNS(svg.namespaceURI, 'use');
+                    path.setAttribute('href', `#path-${thread_count}-${thread}`);
+
+                    let color = shuffled_colors[thread];
                     if (color) {
                         path.setAttribute('fill', colors.get(color)[0]);
                     }
+
+                    let x = i * (template_width + template_spacing_width);
+                    let y = (segment * row_repeats + j) * (template_height + template_spacing_height);
+                    path.setAttribute('x', x);
+                    path.setAttribute('y', y);
+
+                    group.appendChild(path);
                 }
-
-                let x = i * (template_width + template_spacing_width);
-                let y = (segment * row_repeats + j) * (template_height + template_spacing_height);
-                nested_svg.setAttribute('x', x);
-                nested_svg.setAttribute('y', y);
-
-                svg.appendChild(nested_svg);
             }
         }
     }
-
-    pattern_div.append(svg);
 
     var svg_string = new XMLSerializer().serializeToString(svg);
     var svgBlob = new Blob([svg_string], { type: "image/svg+xml;charset=utf-8" });

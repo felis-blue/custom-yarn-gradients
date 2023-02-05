@@ -29,6 +29,7 @@ body {
 
 .container {
     width: 80%;
+    max-width: 1200px;
     padding: 3rem;
     border-radius: .5em;
     background-color: var(--background);
@@ -116,7 +117,7 @@ select,
 
 #color-templates {
     display: grid;
-    grid-template-columns: repeat(8, auto);
+    grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
     gap: .2em;
 }
 

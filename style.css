@@ -62,7 +62,10 @@ body {
 }
 
 .cols {
-    grid-template-columns: 1fr 4fr;
+    max-width: 100%;
+    width: 100ch;
+
+    grid-template-columns: 1fr 3fr;
     grid-template-areas: "label select";
 }
 

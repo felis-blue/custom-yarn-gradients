@@ -33,23 +33,32 @@ body {
     padding: 3rem;
     border-radius: .5em;
     background-color: var(--background);
-    box-shadow: 0 0 8px 2px var(--shadow);
+    box-shadow: 1px 1px 8px var(--shadow);
 }
 
 .banner {
     display: flex;
     justify-content: center;
-    margin-block-end: 1rem;
+
+    padding: 1rem;
+    margin-block-end: 1.5rem;
+
+    background-color: var(--background-accent);
+    border-radius: .5em;
+    box-shadow: 1px 1px 4px -1px var(--shadow);
 }
 
 .info {
     max-width: 100%;
     width: 80ch;
 
-
     padding: 0.5em 2em;
     margin: auto;
     margin-block-end: 2em;
+
+    background-color: var(--background-accent);
+    border-radius: .5em;
+    box-shadow: 1px 1px 4px -1px var(--shadow);
 }
 
 .item {
@@ -138,7 +147,7 @@ button {
     border-radius: 100vw;
     background-color: var(--color, transparent);
 
-    box-shadow: 1px 1px 6px 2px var(--background-accent);
+    box-shadow: 1px 1px 4px -1px var(--shadow);
 }
 
 .color-template {

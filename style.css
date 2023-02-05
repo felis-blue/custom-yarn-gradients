@@ -41,6 +41,16 @@ body {
     margin-block-end: 1rem;
 }
 
+.info {
+    max-width: 100%;
+    width: 80ch;
+
+
+    padding: 0.5em 2em;
+    margin: auto;
+    margin-block-end: 2em;
+}
+
 .item {
     display: grid;
 

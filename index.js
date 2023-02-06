@@ -16,15 +16,15 @@ function populateColors() {
     template.onclick = handleTemplateClick;
     let stylesheet = document.getElementById('styles').sheet;
 
-    for (let [color_name, c] of colors) {
+    for (let [color_num, c] of colors) {
         let new_template = template.cloneNode();
-        new_template.dataset.color = color_name;
+        new_template.dataset.color = color_num;
         new_template.classList.add(c.text_color);
-        new_template.innerText = color_name;
+        new_template.innerText = c.name;
         new_template.onclick = handleTemplateClick;
         template_div.insertBefore(new_template, template);
 
-        let new_rule = `[data-color="${color_name}"] {--color: ${c.hex};}`
+        let new_rule = `[data-color="${color_num}"] {--color: ${c.hex};}`
         stylesheet.insertRule(new_rule);
     }
 }

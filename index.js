@@ -49,6 +49,7 @@ function updateAll() {
             color_part.classList.add('color', 'color-part');
             color_part.dataset.segment = segment;
             color_part.dataset.row = thread;
+            color_part.dataset.color = '000';
             color_part.onclick = handleColorPartClick;
 
             color_div.append(color_part);
@@ -113,7 +114,7 @@ function createPattern() {
                     path.setAttribute('href', `#path-${thread_count}-${thread}`);
 
                     let color = shuffled_colors[thread];
-                    if (color) {
+                    if (color != '000') {
                         path.setAttribute('fill', colors.get(color).hex);
                     }
 

@@ -102,7 +102,7 @@ function createPattern() {
     group.replaceChildren();
 
     for (let segment = 0; segment < segment_count; segment++) {
-        let color_array = color_map[segment];
+        let color_array = [...color_map[segment]];
 
         for (let j = 0; j < row_repeats; j++) {
             for (let i = 0; i < colunm_repeats; i++) {

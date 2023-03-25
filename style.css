@@ -116,6 +116,9 @@ select {
     border: 2px solid var(--text-accent);
     border-radius: .5em;
     padding: .5em;
+
+    /* Stack above custom arrow */
+    z-index: 1;
 }
 
 .select-arrow {

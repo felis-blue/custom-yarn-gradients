@@ -6,8 +6,14 @@ window.onload = () => {
     thread_count_field = document.getElementById('thread-count');
     thread_count_field.onchange = updateAll;
 
+    setupActionButtons();
     populateColors();
     updateAll();
+}
+
+function setupActionButtons() {
+    document.getElementById('download-svg-link').onclick = handleDownloadSvgClick;
+    document.getElementById('download-png-link').onclick = handleDownloadPngClick;
 }
 
 function populateColors() {
@@ -77,7 +83,7 @@ function handleTemplateClick(event) {
     createPattern();
 }
 
-function createPattern() {
+async function createPattern() {
     let segment_count = parseInt(segment_count_field.value);
     let thread_count = parseInt(thread_count_field.value);
 
@@ -137,23 +143,19 @@ function createPattern() {
     }
 
     // svg download
-    var svg_string = new XMLSerializer().serializeToString(svg);
-    var svgBlob = new Blob([svg_string], { type: 'image/svg+xml;charset=utf-8' });
-    var url = URL.createObjectURL(svgBlob);
-    document.getElementById('download-svg-link').href = url;
+    let src = createSvgBlob(svg);
+    document.getElementById('download-svg-link').dataset.url = src;
 
     // png download
-    let image = new Image();
-    image.onload = () => {
-        let canvas = document.createElement('canvas');
-        let context = canvas.getContext('2d');
-        canvas.width = width / 2;
-        canvas.height = height / 2;
-        context.drawImage(image, 0, 0, width / 2, height / 2);
-        let png = canvas.toDataURL('image/png');
-        document.getElementById('download-png-link').href = png;
-    };
-    image.src = url;
+    let image = await loadedImgWithSource(src);
+
+    let canvas = document.createElement('canvas');
+    let context = canvas.getContext('2d');
+    canvas.width = width / 2;
+    canvas.height = height / 2;
+    context.drawImage(image, 0, 0, width / 2, height / 2);
+    let png = canvas.toDataURL('image/png');
+    document.getElementById('download-png-link').dataset.url = png;
 }
 
 function getColorMap() {
@@ -167,6 +169,22 @@ function getColorMap() {
         color_map[part.dataset.segment][part.dataset.row] = part.dataset.color;
     }
     return color_map;
+}
+
+function createSvgBlob(svg) {
+    // create a blob url from the given svg
+    let svg_string = new XMLSerializer().serializeToString(svg);
+    let svg_blob = new Blob([svg_string], { type: 'image/svg+xml;charset=utf-8' });
+    return URL.createObjectURL(svg_blob);
+}
+
+function loadedImgWithSource(src) {
+    // returns a promise that resolves to an image with the source fully loaded
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.src = src;
+    })
 }
 
 function handleColorPartClick(event) {
@@ -187,4 +205,22 @@ function handleColorPartClick(event) {
             }
         }
     }
+}
+
+function handleDownloadSvgClick(event) {
+    let url = event.target.dataset.url;
+    triggerDownload(url, 'colors.svg');
+}
+
+async function handleDownloadPngClick(event) {
+    let url = event.target.dataset.url;
+    triggerDownload(url, 'colors.png');
+}
+
+function triggerDownload(uri, fileName) {
+    // triggers a download event with the given uri and filename
+    let link = document.createElement('a');
+    link.setAttribute('download', fileName);
+    link.href = uri;
+    link.click();
 }

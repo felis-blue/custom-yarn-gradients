@@ -220,18 +220,13 @@ label {
     grid-row: 5 / 5;
 }
 
-.download-link-wrapper {
+.action-button-wrapper {
     width: fit-content;
     justify-self: right;
 }
 
-.download-link {
-    text-decoration: none;
-    color: var(--text);
-
+.action-button {
     border: 2px solid var(--text-accent);
     border-radius: .5em;
-
     padding: .5em;
-    display: inline-block;
 }

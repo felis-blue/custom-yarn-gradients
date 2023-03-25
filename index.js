@@ -88,10 +88,10 @@ function createPattern() {
     // pattern parameters
     let row_repeats = 3;
     let colunm_repeats = 85;
-    let template_width = 210;
-    let template_height = 165;
-    let template_spacing_width = 10;
-    let template_spacing_height = -50;
+    let template_width = 50;
+    let template_height = 40;
+    let template_spacing_width = 2;
+    let template_spacing_height = -12;
 
     let color_map = getColorMap();
 
@@ -146,10 +146,10 @@ function createPattern() {
     let image = new Image();
     image.onload = () => {
         let canvas = document.createElement('canvas');
-        canvas.width = width / 10;
-        canvas.height = height / 10;
         let context = canvas.getContext('2d');
-        context.drawImage(image, 0, 0, width / 10, height / 10);
+        canvas.width = width / 2;
+        canvas.height = height / 2;
+        context.drawImage(image, 0, 0, width / 2, height / 2);
         let png = canvas.toDataURL('image/png');
         document.getElementById('download-png-link').href = png;
     };

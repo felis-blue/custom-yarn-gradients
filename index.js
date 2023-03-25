@@ -158,14 +158,16 @@ async function createPattern() {
     let src = createSvgBlob(svg);
     document.getElementById('download-svg-link').dataset.url = src;
 
-    // png download
+    // draw on canvas
     let image = await loadedImgWithSource(src);
 
-    let canvas = document.createElement('canvas');
+    let canvas = document.getElementById('pattern-canvas');
     let context = canvas.getContext('2d');
     canvas.width = width / 2;
     canvas.height = height / 2;
     context.drawImage(image, 0, 0, width / 2, height / 2);
+
+    // png download
     let png = canvas.toDataURL('image/png');
     document.getElementById('download-png-link').dataset.url = png;
 }

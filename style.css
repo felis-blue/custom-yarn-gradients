@@ -282,3 +282,11 @@ label {
     border-radius: .5em;
     padding: .5em;
 }
+
+#svg {
+    display: none;
+}
+
+#pattern-canvas {
+    width: 100%;
+}

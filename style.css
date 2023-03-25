@@ -221,8 +221,11 @@ label {
 }
 
 .action-button-wrapper {
-    width: fit-content;
-    justify-self: right;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: .2em;
 }
 
 .action-button {

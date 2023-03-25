@@ -1,3 +1,39 @@
+/* ------------ */
+/* STYLE RESETS */
+/* ------------ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+select {
+    /* A reset of styles, including removing the default dropdown arrow */
+    appearance: none;
+    /* Additional resets for further consistency */
+    background: none;
+    font: inherit;
+    color: inherit;
+
+    cursor: pointer;
+}
+
+button {
+    /* A reset of styles, including removing the default dropdown arrow */
+    appearance: none;
+    /* Additional resets for further consistency */
+    background: none;
+    font: inherit;
+    color: inherit;
+    padding: 0;
+
+    cursor: pointer;
+}
+
+/* ---------------------------- */
+/* COLOR AND SPACING PROPERTIES */
+/* ---------------------------- */
 :root {
     --background: #e8e8e8;
     --background-accent: #d8d8d8;
@@ -9,11 +45,6 @@
     --space: calc(.4rem + 2 * var(--unit));
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
 
 html {
     font-family: Avenir, sans-serif;
@@ -101,17 +132,7 @@ label {
     text-align: right;
 }
 
-select {
-    /* A reset of styles, including removing the default dropdown arrow */
-    appearance: none;
-    /* Additional resets for further consistency */
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-
-    cursor: pointer;
-
+.select {
     width: 100%;
     border: 2px solid var(--text-accent);
     border-radius: .5em;
@@ -130,7 +151,7 @@ select {
     margin-right: 1em;
 }
 
-select,
+.select,
 .select-arrow {
     grid-area: select;
 }
@@ -144,13 +165,6 @@ select,
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
     gap: .2em;
-}
-
-button {
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    padding: 0;
 }
 
 .color {

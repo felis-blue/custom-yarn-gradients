@@ -15,7 +15,7 @@ function populateColors() {
     let template = document.querySelector('.color-template');
     template.onclick = handleTemplateClick;
     template.dataset.color = '000';
-    let stylesheet = document.getElementById('styles').sheet;
+    let stylesheet = document.getElementById('color-styles').sheet;
 
     // create color template buttons for all colors from colors.js
     for (let [color_num, c] of colors) {

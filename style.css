@@ -9,9 +9,9 @@
 }
 
 select {
-    /* A reset of styles, including removing the default dropdown arrow */
+    /* reset native ui control styles, including removing the default dropdown arrow */
     appearance: none;
-    /* Additional resets for further consistency */
+    /* additional resets */
     background: none;
     font: inherit;
     color: inherit;
@@ -20,15 +20,24 @@ select {
 }
 
 button {
-    /* A reset of styles, including removing the default dropdown arrow */
+    /* reset native ui control styles */
     appearance: none;
-    /* Additional resets for further consistency */
+    /* additional resets */
     background: none;
     font: inherit;
     color: inherit;
     padding: 0;
 
     cursor: pointer;
+}
+
+input {
+    /* reset native ui control styles */
+    appearance: none;
+    /* additional resets */
+    background: none;
+    font: inherit;
+    color: inherit;
 }
 
 /* ---------------------------- */
@@ -252,4 +261,24 @@ label {
 
 #copy-pattern-code.copied::after {
     opacity: 1;
+}
+
+#pattern-code-dialog {
+    background-color: inherit;
+    color: inherit;
+
+    border: 2px solid var(--text-accent);
+    border-radius: .5em;
+    padding: var(--space);
+
+    width: calc(100% - 2 * var(--space));
+    max-width: 60rem;
+    min-width: calc(20rem - var(--space));
+}
+
+.input {
+    width: 100%;
+    border: 2px solid var(--text-accent);
+    border-radius: .5em;
+    padding: .5em;
 }

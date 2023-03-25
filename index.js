@@ -15,6 +15,15 @@ function setupActionButtons() {
     document.getElementById('copy-pattern-code').onclick = handleCopyPatternCodeClick;
     document.getElementById('download-svg-link').onclick = handleDownloadSvgClick;
     document.getElementById('download-png-link').onclick = handleDownloadPngClick;
+    setupPatternCodeDialog();
+}
+
+function setupPatternCodeDialog() {
+    const pattern_code_dialog = document.getElementById('pattern-code-dialog');
+    document.getElementById('apply-pattern-code').onclick = () => {
+        pattern_code_dialog.showModal();
+    };
+    pattern_code_dialog.onclose = handlePatternCodeDialog;
 }
 
 function populateColors() {
@@ -39,7 +48,7 @@ function populateColors() {
     }
 }
 
-function updateAll() {
+function updateAll(do_create_pattern = true) {
     let segment_count = parseInt(segment_count_field.value);
     let thread_count = parseInt(thread_count_field.value);
 
@@ -68,7 +77,9 @@ function updateAll() {
         }
     }
 
-    createPattern();
+    if (do_create_pattern) {
+        createPattern();
+    }
 }
 
 function handleTemplateClick(event) {
@@ -263,4 +274,51 @@ function createPatternCode() {
         pattern_code += `${streak}x${last_color}`;
     }
     return pattern_code;
+}
+
+function handlePatternCodeDialog(event) {
+    const pattern_code = document.getElementById('pattern-code').value;
+    // reset form
+    document.getElementById('pattern-code-dialog-form').reset();
+
+    if (event.target.returnValue !== "submit") {
+        return;
+    }
+
+    applyPatternCode(pattern_code);
+}
+
+function applyPatternCode(pattern_code) {
+    pattern_parts = pattern_code.split('|');
+    const [segment_count, thread_count] = pattern_parts.shift().split('-').map((s) => parseInt(s));
+    segment_count_field.value = segment_count;
+    thread_count_field.value = thread_count;
+
+    updateAll(false);
+
+    let color_map = [];
+    let thread = 0;
+    let thread_pattern, segment_length, color, segment;
+    for (let thread_part of pattern_parts) {
+        thread_pattern = thread_part.split('-');
+        segment = 0;
+        for (let segment_part of thread_pattern) {
+            [segment_length, color] = segment_part.split('x').map((s, i) => (i == 0) ? parseInt(s) : s);
+            for (let i = segment; i < segment + segment_length; i++) {
+                if (!color_map[i]) {
+                    color_map[i] = []
+                }
+                color_map[i][thread] = color;
+            }
+            segment += segment_length;
+        }
+        thread++;
+    }
+
+    let color_parts = document.querySelectorAll('.color-part');
+    for (let part of color_parts) {
+        part.dataset.color = color_map[part.dataset.segment][part.dataset.row];
+    }
+
+    createPattern();
 }

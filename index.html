@@ -129,9 +129,22 @@
                     <button type="button" id="download-png-link" class="action-button">Download PNG</button>
                     <button type="button" id="download-svg-link" class="action-button">Download SVG</button>
                     <button type="button" id="copy-pattern-code" class="action-button">Copy pattern code</button>
+                    <button type="button" id="apply-pattern-code" class="action-button">Apply pattern code</button>
                 </div>
             </div>
         </form>
+        <dialog id="pattern-code-dialog">
+            <form id="pattern-code-dialog-form" method="dialog">
+                <div class="item">
+                    <label for="pattern-code">Pattern Code</label>
+                    <input class="input" type="text" name="pattern-code" id="pattern-code">
+                    <div class="action-button-wrapper">
+                        <button class="action-button" value="submit">Confirm</button>
+                        <button class="action-button">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 

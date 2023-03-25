@@ -230,3 +230,23 @@ label {
     border-radius: .5em;
     padding: .5em;
 }
+
+#copy-pattern-code {
+    position: relative;
+}
+
+#copy-pattern-code::after {
+    content: 'Copied!';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: inherit;
+    background-color: var(--background);
+
+    opacity: 0;
+    transition: opacity 300ms;
+}
+
+#copy-pattern-code.copied::after {
+    opacity: 1;
+}

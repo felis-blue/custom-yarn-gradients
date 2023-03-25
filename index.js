@@ -12,6 +12,7 @@ window.onload = () => {
 }
 
 function setupActionButtons() {
+    document.getElementById('copy-pattern-code').onclick = handleCopyPatternCodeClick;
     document.getElementById('download-svg-link').onclick = handleDownloadSvgClick;
     document.getElementById('download-png-link').onclick = handleDownloadPngClick;
 }
@@ -223,4 +224,43 @@ function triggerDownload(uri, fileName) {
     link.setAttribute('download', fileName);
     link.href = uri;
     link.click();
+}
+
+function handleCopyPatternCodeClick(event) {
+    const code = createPatternCode();
+    navigator.clipboard.writeText(code);
+    event.target.classList.add('copied');
+    setTimeout(() => {
+        event.target.classList.remove('copied');
+    }, 1500);
+}
+
+function createPatternCode() {
+    const segment_count = parseInt(segment_count_field.value);
+    const thread_count = parseInt(thread_count_field.value);
+
+    if (!(segment_count && thread_count)) {
+        return;
+    }
+
+    const color_map = getColorMap();
+
+    let pattern_code = `${segment_count}-${thread_count}`;
+    let streak, last_color, current_color;
+    for (let thread = 0; thread < thread_count; thread++) {
+        pattern_code += '|';
+        streak = 0;
+        last_color = color_map[0][thread];
+        for (let segment = 0; segment < segment_count; segment++) {
+            current_color = color_map[segment][thread];
+            if (current_color != last_color) {
+                pattern_code += `${streak}x${last_color}-`;
+                streak = 0;
+                last_color = current_color;
+            }
+            streak++;
+        }
+        pattern_code += `${streak}x${last_color}`;
+    }
+    return pattern_code;
 }

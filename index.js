@@ -13,8 +13,8 @@ window.onload = () => {
 
 function setupActionButtons() {
     document.getElementById('copy-pattern-code').onclick = handleCopyPatternCodeClick;
-    document.getElementById('download-svg-link').onclick = handleDownloadSvgClick;
-    document.getElementById('download-png-link').onclick = handleDownloadPngClick;
+    document.getElementById('download-svg-link').onclick = handleDownloadClick;
+    document.getElementById('download-png-link').onclick = handleDownloadClick;
     setupPatternCodeDialog();
 }
 
@@ -221,14 +221,10 @@ function handleColorPartClick(event) {
     }
 }
 
-function handleDownloadSvgClick(event) {
+function handleDownloadClick(event) {
     let url = event.target.dataset.url;
-    triggerDownload(url, 'colors.svg');
-}
-
-async function handleDownloadPngClick(event) {
-    let url = event.target.dataset.url;
-    triggerDownload(url, 'colors.png');
+    let fileName = event.target.dataset.fileName;
+    triggerDownload(url, fileName);
 }
 
 function triggerDownload(uri, fileName) {

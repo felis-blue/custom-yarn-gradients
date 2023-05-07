@@ -43,6 +43,7 @@ input {
 /* ---------------------------- */
 /* COLOR AND SPACING PROPERTIES */
 /* ---------------------------- */
+
 :root {
     --background: #e8e8e8;
     --background-accent: #d8d8d8;
@@ -51,7 +52,7 @@ input {
     --shadow: #a8a8a8;
 
     --unit: clamp(3.2px, 1vw, 12px);
-    --space: calc(.4rem + 2 * var(--unit));
+    --space: calc(6.4px + 2 * var(--unit));
 }
 
 
@@ -71,8 +72,8 @@ body {
 
 .container {
     width: 100%;
-    max-width: 75rem;
-    min-width: calc(20rem - var(--space));
+    max-width: 1200px;
+    min-width: calc(320px - var(--space));
     padding: var(--space);
     border-radius: .5em;
     background-color: var(--background);
@@ -95,7 +96,7 @@ h1 {
 }
 
 .info {
-    width: 45rem;
+    width: 720px;
     max-width: 100%;
 
     padding: var(--space);
@@ -272,8 +273,8 @@ label {
     padding: var(--space);
 
     width: calc(100% - 2 * var(--space));
-    max-width: 60rem;
-    min-width: calc(20rem - var(--space));
+    max-width: 960px;
+    min-width: calc(320px - var(--space));
 }
 
 .input {

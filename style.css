@@ -1,3 +1,18 @@
+/* ---- */
+/* FONT */
+/* ---- */
+
+@font-face {
+    font-family: Ysabeau;
+    src: url(fonts/Ysabeau-Regular.ttf);
+}
+
+@font-face {
+    font-family: Ysabeau;
+    src: url(fonts/Ysabeau-ExtraBold.ttf);
+    font-weight: bold;
+}
+
 /* ------------ */
 /* STYLE RESETS */
 /* ------------ */
@@ -57,10 +72,11 @@ input {
 
 
 html {
-    font-family: Avenir, sans-serif;
+    font-family: 'Ysabeau', sans-serif;
+    font-variant-numeric: lining-nums;
     background-color: var(--background-accent);
     color: var(--text);
-    font-size: 16px;
+    font-size: 18px;
 }
 
 body {
@@ -110,7 +126,7 @@ h1 {
 
 .info-heading {
     font-size: 1.2rem;
-    margin-block: 0 .5rem;
+    margin-block: 0 .2em;
 }
 
 .info-ul {
@@ -173,13 +189,13 @@ label {
 
 #color-templates {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
     gap: .2em;
 }
 
 .color {
     width: 100%;
-    height: 1.5em;
+    height: 1.3em;
     border: 1px solid var(--color, var(--text-accent));
     border-radius: 100vw;
     background-color: var(--color, transparent);
@@ -188,7 +204,7 @@ label {
 }
 
 .color-template {
-    height: 2em;
+    height: 1.8em;
 }
 
 .light {

@@ -29,9 +29,8 @@ function setupPatternCodeDialog() {
 function populateColors() {
     let template_div = document.getElementById('color-templates');
     let template = document.querySelector('.color-template');
-    template.onclick = handleTemplateClick;
-    template.dataset.color = '000';
     let stylesheet = document.getElementById('color-styles').sheet;
+    let hue_group = "0";
 
     // create color template buttons for all colors from colors.js
     for (let [color_num, c] of colors) {
@@ -40,12 +39,20 @@ function populateColors() {
         new_template.classList.add(c.text_color);
         new_template.innerText = c.name;
         new_template.onclick = handleTemplateClick;
+        if (hue_group !== c.hue_group) {
+            hue_group = c.hue_group;
+            new_template.classList.add("hue-group-start");
+        }
         template_div.insertBefore(new_template, template);
 
         // add the corresponding css rule for the current color
         let new_rule = `[data-color="${color_num}"] {--color: ${c.hex};}`
         stylesheet.insertRule(new_rule);
     }
+
+    template.dataset.color = '000';
+    template.onclick = handleTemplateClick;
+    template.classList.add("hue-group-start");
 }
 
 function updateAll(do_create_pattern = true) {

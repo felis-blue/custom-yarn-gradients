@@ -188,8 +188,10 @@ label {
 }
 
 #color-templates {
+    font-size: 0.75rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+    align-items: end;
     gap: .2em;
 }
 
@@ -204,7 +206,12 @@ label {
 }
 
 .color-template {
-    height: 1.8em;
+    height: 1.8rem;
+}
+
+.hue-group-start {
+    grid-column-start: 1;
+    margin-block-start: .8em;
 }
 
 .light {
